@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<title>DataTables example - Select columns</title> 
+	
+	<!-- DEPENDÊNCIAS: -->
+	<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> -->
+	<link rel="stylesheet" type="text/html" href="datatables/images">
+	<link rel="stylesheet" type="text/css" href="datatables/css/jquery.dataTables.min.css">
+
+	<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="datatables/css/buttons.dataTables.min.css">
+	<!-- </DEPENDÊNCIAS> -->
+
+	
+</head>
+<body class="wide comments example">
+	<div class="fw-container">
+		<div class="fw-body">
+			<div class="table">
+                <table id="table-lista-clientes" class="display table responsive" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Razao Social / Nome</th>
+                            <th>Nome Fantasia</th>
+                            <th>Cnpj / Cpf</th>
+                            <th>Inscrição Estadual</th> 
+                            <th>Inscrição Municipal</th> 
+
+                            <!-- <th>Endereço Fiscal</th> 
+                            <th>Número</th> 
+                            <th>Complemento</th> 
+                            <th>Bairro</th> 
+                            <th>UF</th> 
+                            <th>Cidade</th> 
+                            <th>CEP</th> 
+
+                            <th>Endereço Operacional</th> 
+                            <th>Número</th> 
+                            <th>Complemento</th> 
+                            <th>Bairro</th> 
+                            <th>UF</th> 
+                            <th>Cidade</th> 
+                            <th>CEP</th> 
+
+                            <th>Responsável Administrativo</th> 
+                            <th>Telefone</th> 
+                            <th>Ramal</th>
+                            <th>Celular</th> 
+                            <th>E-mail</th>  
+
+                            <th>Responsável Financeiro</th> 
+                            <th>Telefone</th> 
+                            <th>Ramal</th> 
+                            <th>Celular</th> 
+                            <th>E-mail</th>
+
+                            <th>Responsável Tecnico</th> 
+                            <th>Telefone</th> 
+                            <th>Ramal</th> 
+                            <th>Celular</th> 
+                            <th>E-mail</th>  -->
+                            
+                            <th class="datetime">Criado Em</th>
+                            <th>Visualizar</th>
+                            <th>Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    	<tr>
+                    		<td>João</td>
+                    		<td>John</td>
+                    		<td>12345678901</td>
+                    		<td>asgsadg</td>
+                    		<td>1252136347647545</td>
+
+                    		<td>2020-04-03 23:59:13</td>
+                    		<td>1</td>
+                    		<td>1</td>
+                    	</tr>
+                    	<tr>
+                    		<td>Karina</td>
+                    		<td>sgsd</td>
+                    		<td>56786712356</td>
+                    		<td>1241254912975</td>
+                    		<td>asf</td>
+
+                    		<td>2020-04-03 23:23:01</td>
+                    		<td>2</td>
+                    		<td>2</td>
+                    	</tr>
+                    	<tr>
+                    		<td>Larissa</td>
+                    		<td>afsad</td>
+                    		<td>34634623523</td>
+                    		<td>1249122975531</td>
+                    		<td>sadf</td>
+
+                    		<td>2020-04-03 12:59:12</td>
+                    		<td>3</td>
+                    		<td>3</td>
+                    	</tr>
+                    	<tr>
+                    		<td>João</td>
+                    		<td>John</td>
+                    		<td>12345678901</td>
+                    		<td>asgsadg</td>
+                    		<td>1252136347647545</td>
+
+                    		<td>2020-04-03 23:59:13</td>
+                    		<td>1</td>
+                    		<td>1</td>
+                    	</tr>
+                    	<tr>
+                    		<td>Karina</td>
+                    		<td>sgsd</td>
+                    		<td>56786712356</td>
+                    		<td>1241254912975</td>
+                    		<td>asf</td>
+
+                    		<td>2020-04-03 23:23:01</td>
+                    		<td>2</td>
+                    		<td>2</td>
+                    	</tr>
+                    	<tr>
+                    		<td>Larissa</td>
+                    		<td>afsad</td>
+                    		<td>34634623523</td>
+                    		<td>1249122975531</td>
+                    		<td>sadf</td>
+
+                    		<td>2020-04-03 12:59:12</td>
+                    		<td>3</td>
+                    		<td>3</td>
+                    	</tr>
+                    	<tr>
+                    		<td>João</td>
+                    		<td>John</td>
+                    		<td>12345678901</td>
+                    		<td>asgsadg</td>
+                    		<td>1252136347647545</td>
+
+                    		<td>2020-04-03 23:59:13</td>
+                    		<td>1</td>
+                    		<td>1</td>
+                    	</tr>
+                    	<tr>
+                    		<td>Karina</td>
+                    		<td>sgsd</td>
+                    		<td>56786712356</td>
+                    		<td>1241254912975</td>
+                    		<td>asf</td>
+
+                    		<td>2020-04-03 23:23:01</td>
+                    		<td>2</td>
+                    		<td>2</td>
+                    	</tr>
+                    	<tr>
+                    		<td>Larissa</td>
+                    		<td>afsad</td>
+                    		<td>34634623523</td>
+                    		<td>1249122975531</td>
+                    		<td>sadf</td>
+
+                    		<td>2020-04-03 12:59:12</td>
+                    		<td>3</td>
+                    		<td>3</td>
+                    	</tr>
+                    	<tr>
+                    		<td>João</td>
+                    		<td>John</td>
+                    		<td>12345678901</td>
+                    		<td>asgsadg</td>
+                    		<td>1252136347647545</td>
+
+                    		<td>2020-04-03 23:59:13</td>
+                    		<td>1</td>
+                    		<td>1</td>
+                    	</tr>
+                    	<tr>
+                    		<td>Karina</td>
+                    		<td>sgsd</td>
+                    		<td>56786712356</td>
+                    		<td>1241254912975</td>
+                    		<td>asf</td>
+
+                    		<td>2020-04-03 23:23:01</td>
+                    		<td>2</td>
+                    		<td>2</td>
+                    	</tr>
+                    	<tr>
+                    		<td>Larissa</td>
+                    		<td>afsad</td>
+                    		<td>34634623523</td>
+                    		<td>1249122975531</td>
+                    		<td>sadf</td>
+
+                    		<td>2020-04-03 12:59:12</td>
+                    		<td>3</td>
+                    		<td>3</td>
+                    	</tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+		</div>
+	</div>
+	<!-- <DEPENDÊNCIAS> -->
+	<!-- <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
+	<script type="text/javascript" src="jquery/js/jquery-3.3.1.min.js"></script>
+
+	<!-- <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> -->
+	<script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+	<!-- <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script> -->
+	<script type="text/javascript" src="datatables/js/dataTables.buttons.min.js"></script>
+
+	<!-- <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.colVis.min.js"></script> -->
+	<script type="text/javascript" src="datatables/js/buttons.colVis.min.js"></script>
+	<!-- </DEPENDÊNCIAS> -->
+
+	<script type="text/javascript" src="js/lista-clientes.js"></script>
+</body>
+</html>
