@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript" src="../_plugins/jquery/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+		const cep = "13506743";
+		$.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(data) {
+			console.log(data);
+			if (!("error" in data)) {
+				console.log('success');
+			}
+		});
+	</script>
+</body>
+</html>
