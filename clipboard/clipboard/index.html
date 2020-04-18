@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<style>
+		#div-link {
+			margin-top: 10px;
+		}
+		#link {
+			border-radius: 5px 0 0 5px;
+			background: white;
+		}
+		#btn-tooltip {
+			border-radius: 0 5px 5px 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="container" style="width: 400px;">
+		<div id="div-link" class="input-group mb-2">
+			<input readonly type="url" id="link" class="form-control" value="http://frontend_js.sgo.farm/pag-cadastro-cliente.php?token=955dd0bd3dbe57c01580a6c8455fc687" /> 
+			<button type="button" id="btn-tooltip" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" data-clipboard-target="#link" data-original-title="Copiar link para a área de transferência" title="Copiar link para a área de transferência">
+			  <i class="far fa-copy"></i> Copiar link
+			</button>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+	<script type="text/javascript">
+		// initialize all tooltips with data-toggle="tooltip"
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip();
+
+			var clipboard = new ClipboardJS('#btn-tooltip');
+
+			clipboard.on('success', function(e) {
+				// console.info('Action:', e.action)
+				// console.info('Text:', e.text)
+				// console.info('Trigger:', e.trigger)
+
+				const max = 40;
+				let link = e.text;
+				if (link.length > max) {
+					link = link.slice(0, max - 3) + "...";
+				}
+
+				const tooltip = $(e.trigger);
+				tooltip.attr('data-original-title', '\"' + link + '\" foi copiado!');
+				tooltip.tooltip('update');
+				tooltip.tooltip('show');
+
+				$(tooltip).on('hidden.bs.tooltip', function() {
+					$(tooltip).attr('data-original-title', "Copiar link para a área de transferência");
+					$(tooltip).tooltip('update');
+				});
+
+				e.clearSelection();    
+			});
+
+			clipboard.on('error', function(e) {
+				console.error('Action:', e.action)
+				console.error('Trigger:', e.trigger)
+			})
+		})
+	</script>
+</body>
+</html>
