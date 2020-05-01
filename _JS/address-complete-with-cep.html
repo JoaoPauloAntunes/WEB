@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript" src="../_plugins/jquery/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+		const cep = "13506743";
+		$.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(data) {
+			console.log(data);
+			if (!("error" in data)) {
+				console.log('success');
+				$('body').append(`<p><strong>bairro: </strong>"${data.bairro}"</p>`);
+				$('body').append(`<p><strong>cep: </strong>"${data.cep}"</p>`);
+				$('body').append(`<p><strong>complemento: </strong>"${data.complemento}"</p>`);
+				$('body').append(`<p><strong>localidade: </strong>"${data.localidade}"</p>`);
+				$('body').append(`<p><strong>logradouro: </strong>"${data.logradouro}"</p>`);
+				$('body').append(`<p><strong>uf: </strong>"${data.uf}"</p>`);
+			}
+		});
+	</script>
+</body>
+</html>

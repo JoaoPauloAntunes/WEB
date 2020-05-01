@@ -1,0 +1,31 @@
+Fazer tooltip:
+
+1) Criar uma área "tooltip"
+
+2) Criar um botão "btn" filho de "tooltip"
+
+3) Criar um <span> "tooltip-text" filho de botão
+
+
+4) Usar estilos:
+a) tooltip:
+* usar posicionamento relativo e configurar para mostrar os blocos em linha: queremos posicionar o botão ao lado do campo de texto
+
+b) tooltip-text do tooltip:
+* deixar elemento invisível: queremos que o tooltip-text fique visível apenas quando o mouse está sobre "btn"
+* definir uma largula para o tooltip
+* (a altura pode ser a altura do texto)
+* definir cor e cor de fundo
+* alinhar o texto
+* arredondar bordas
+* adicionar preenchimento no elemento
+* definir o posicionamento como absoluto: queremos deixar o elemento livre, os outros elementos não irão influenciar no posicionamento deste elemento. Iremos deixar este elemento sobre os outros
+* Aumentar o z-index: queremos que este elemento fique sobre os demais, então, aumentamos uma camada
+* usamos bottom/left/right/top para reposicionar este elemento a partir do posicionamento do elemento pai "tooltip"
+* para melhorar o posicionamento, podemos recorrer a margin, que irá adicionar uma largura externa transparente e reposicionar o elemento
+* definimos a opacidade como 0 e definimos um tempo para alterar a opacidade com o viés de fazer um "efeito" ao deixar este elemento visível
+
+c) tooltip-text do tooltip enquanto ocorre uma mudança de estado (mover o mouse sobre o tooltip)
+
+d) tooltip-text enquanto o mouse está sobre o tooltipo:
+* deixar o elemento visível e aumentar a opacidade

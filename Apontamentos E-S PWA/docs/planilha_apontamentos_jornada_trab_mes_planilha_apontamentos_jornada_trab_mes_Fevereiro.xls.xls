@@ -1,0 +1,47 @@
+
+	<table>
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Data de registro</th>
+				<th>Data de apontamento</th>
+				<th>Hora de inicio de jornada</th>
+				<th>Hora de inicio de almoco</th>
+				<th>Hora de fim de almoco</th>
+				<th>Hora de fim de jornada</th>
+				<th>Atividades do dia</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>João Paulo</td>
+				<td>2020-02-15</td>
+				<td>2020-02-12</td>
+				<td>08:00:00</td>
+				<td>12:00:00</td>
+				<td>12:30:00</td>
+				<td>18:00:00</td>
+				<td>Teste</td>
+			</tr>
+			<tr>
+				<td>João Paulo</td>
+				<td>2020-02-15</td>
+				<td>2020-02-15</td>
+				<td>13:00:00</td>
+				<td>13:00:00</td>
+				<td>13:30:00</td>
+				<td>18:00:00</td>
+				<td>Teste</td>
+			</tr>
+			<tr>
+				<td>João Paulo</td>
+				<td>2020-02-22</td>
+				<td>2020-02-22</td>
+				<td>13:00:00</td>
+				<td>13:00:00</td>
+				<td>13:30:00</td>
+				<td>18:00:00</td>
+				<td>Exemplo</td>
+			</tr>
+		</tbody>
+	</table>

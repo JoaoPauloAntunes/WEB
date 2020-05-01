@@ -1,0 +1,56 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<form method="get" action="RegioesPais.php">
+			<fieldset id="ests"><legend>Estado</legend>
+			
+				<input type="radio" name="est" id="e1" checked value=1>
+				<label for="e1">Amazonas</label>
+				
+				<input type="radio" name="est" id="e2" value=2>
+				<label for="e2">Bahia</label>
+				
+				<input type="radio" name="est" id="e3" value=3>
+				<label for="e2">Goiás</label>
+				
+				<input type="radio" name="est" id="e4" value=4>
+				<label for="e3">São Paulo</label>
+				
+				<input type="radio" name="est" id="e5" value=5>
+				<label for="e4">Rio Grande do Sul</label>
+				
+				<input type="radio" name="est" id="e6" value=4>
+				<label for="e6">Minas Gerais</label>
+				
+				<input type="radio" name="est" id="e7" value=4>
+				<label for="e7">Rio de Janeiro</label>
+			</fieldset>
+			
+			<!--
+			<select name="est" id="iest">
+				<option value="1" id="e1">Amazonas</option>
+				
+				<option value="3">Goiás</option>
+				
+				<option value="4">São Paulo</option>
+				
+				<option value="5">Rio Grande do Sul</option> 
+			</select> -->
+			
+			<input type="submit" value="Identificar região">
+		</form>
+		
+		<img src="regioes2.png" usemap="#mapa">
+		<map name="mapa">
+			<label for="e1"><area shape="circle" coords="68,73,14"></label>
+			<label for="e2"><area shape="circle" coords="227,135,14"></label>
+			<label for="e3"><area shape="circle" coords="174,165,14"></label>
+			<label for="e4"><area shape="circle" coords="177,198,14"></label>
+			<label for="e5"><area shape="circle" coords="152,259,14"></label>
+			<label for="e6"><area shape="circle" coords="206,177,14"></label>
+			<label for="e7"><area shape="circle" coords="223,202,14"></label>
+		</map>
+			
+	</body>
+</html>

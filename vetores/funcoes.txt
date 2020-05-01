@@ -1,0 +1,12 @@
+#Série- range()
+	<?php
+		$v = range(5,20,5);
+		print_r($v);
+	?>
+#para cada- foreach()
+ <?php
+	$v = range(2,10,1);
+	foreach($v as $n) {
+		echo "$n ";
+	}
+ ?>

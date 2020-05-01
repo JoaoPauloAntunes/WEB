@@ -1,0 +1,25 @@
+<?php
+	$v = array(1,2);
+?>
+array_push
+	Semelhante a "$v[]", que põe novo elemento na última posição do vetor
+		<?php
+			array_push($v,5);
+			print_r($v)
+		?>
+			saída:
+							Array
+(
+    [0] => 1
+    [1] => 2
+    [2] => 5
+)
+	
+		
+array_pop
+	Retira elemento do vetor
+		<?php
+			array_pop($v);
+		?>
+			saída:
+			

@@ -1,0 +1,23 @@
+{
+  "name": "Site olaMundoPWA",
+  "short_name": "olaMundoPWA",
+  "theme_color": "#005f97",
+  "background_color": "#005f97",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/?utm_source=homescreen",
+  "lang": "pt-BR",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "images/bomb-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/bomb-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

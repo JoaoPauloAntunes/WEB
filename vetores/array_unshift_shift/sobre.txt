@@ -1,0 +1,4 @@
+array_unshift #sem remover 
+	Coloca novo elemento no começo do vetor e atualiza os índices
+array_shift #remover
+	Retira elemento do começo do vetor e atualiza os índices

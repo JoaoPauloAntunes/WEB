@@ -1,0 +1,26 @@
+<html>
+	<body>
+		<form method="get" action="calc.php">
+			
+			<label for="in">Numero: </label>
+			<input type="number" name="n" id="in"><br>
+			<!--
+			<select name="func" id="ifunc">Escolha uma função:
+				<option value="dobro" selected>dobro</option>
+				<option value="triplo">triplo</option>
+				<option value="raiz">raíz quadrada</option>
+			</select><br>
+			
+			-->
+			<fieldset><legend>Escolha uma função</legend>
+				<input type="radio" name="func" id="dobro" value="dobro" checked>
+				<label for="dobro">Dobro</label>
+				<input type="radio" name="func" id="triplo" value="triplo">
+				<label for="triplo">Triplo</label>
+				<input type="radio" name="func" id="raiz" value="raiz">
+				<label>Raíz quadrada</label>
+			</fieldset>
+			<br><input type="submit" value="Calcular">
+		</form>
+	</body>
+</html>

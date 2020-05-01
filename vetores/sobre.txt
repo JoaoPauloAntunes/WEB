@@ -1,0 +1,23 @@
+Vetores em PHP são dinâmicos e seus elementos podem ser heterogêneos (conter diferentes tipos de elementos; str, chr, int, float...)
+	Atribuição de vetor
+		<?php
+			$n[0]=3;
+			$n[1]=2;
+			$n[2]=4;
+		?>
+		ou,simplesmente:
+		<?php
+			$n[]=3;
+			$n[]=2;
+			$n[]=4;
+		?>
+		ou
+		<?php
+			$n = array(3,2,4);
+		?>
+		Misturando:
+		<?php
+			$n = array(3);
+			$n[1] = 2;
+			$n[] = 4;
+		?>
