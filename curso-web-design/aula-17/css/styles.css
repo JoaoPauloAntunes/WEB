@@ -1,0 +1,60 @@
+.container {
+	background: #ccc;
+	width: 800px;
+	height: 350px;
+	margin: 100px auto;
+}
+
+.top {
+	background: red;
+	width: 100%;
+	height: 80px;
+	background: #666666;
+	display: flex;
+	justify-content: space-between;
+}
+.top .itens {
+	background: blue;
+}
+.logo {
+	width: 200px;
+}
+.info {
+	width: 550px;
+}
+
+.corpo {
+	background: red;
+	display: flex;
+	justify-content: space-between;
+}
+.menu-vertical {
+	height: 250px;
+	width: 220px;
+	background: yellow;
+}
+
+.conteudo-principal {
+	height: 250px;
+	width: 570px;
+	background: black;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.banner {
+	height: 120px;
+	background: pink;
+}
+.opcoes {
+	height: 110px;
+	background: yellow;
+	display: flex;
+	justify-content: space-between;
+	/*align-items: center;*/
+}
+.opcoes .itens {
+	background: blue;
+	width: 178px;
+	height: 100px;
+}
