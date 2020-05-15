@@ -59,8 +59,10 @@
     <script type="text/javascript" src="multiselect/js/jquery.multiselect.filter.js"></script>
 
     <script>
-        let key = 0;
         $("#frotas").multiselect().multiselectfilter();
+        
+        let key = 0;
+        
         $("#trazer-mais-itens").click(() => {
             $.ajax({
                 url: 'ajax/ajax-data.php' ,
@@ -90,7 +92,26 @@
             scroll = scroller.scrollTop / maxScroll;
             // scrollPercentage = scroller.scrollTop / maxScroll * 100;
             if (scroll > 0.8) {
-                $("#trazer-mais-itens").click();
+                $.ajax({
+                    url: 'ajax/ajax-data.php' ,
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        key: key ++,
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        response.forEach((data, index, array) => {
+                            // console.log(data['frota']);
+                            $("#frotas").append(`<option>${data['frota']}</option>`)
+                        });
+                        // console.log($("#frotas"));
+                        $("#frotas").multiselect('refresh').multiselectfilter();
+                    },
+                    error: function(response) {
+                        console.log(response);
+                    }
+                });
             }
         });
     </script>
