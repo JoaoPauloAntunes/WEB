@@ -68,6 +68,9 @@ $(() => {
       "topRight":  "playPauseButton, zoomButton, downloadButton, fullscreenButton, closeButton" 
     },
     "viewerTheme": "dark",
-    "viewerImageDisplay": "bestImageQuality"
+    "viewerImageDisplay": "bestImageQuality",
+    "thumbnailToolbarImage":      { 
+      "topLeft": 'download, info' 
+    },
   });
 });
