@@ -11,9 +11,9 @@ $(() => {
         kind: "album",         // item's kind. Possible values: [image, album]
       },
       {
-        src: "picture_2.jpeg", // image url
-        srct: "picture_2.jpeg", // thumbnail url
-        title: "Title 2", // media title
+        src: "picture_2.jpeg",        // image url
+        srct: "picture_2.jpeg",       // thumbnail url
+        title: "Title 2",             // media title
         description: "Description 2", // media description
         ID: 10,
         albumID: 1,
