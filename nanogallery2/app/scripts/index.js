@@ -231,13 +231,14 @@ $(() => {
     thumbnailDisplayTransition: "scaleUp",
     thumbnailDisplayTransitionDuration: 500,
     thumbnailDisplayInterval: 30,
+    thumbnailHoverEffect2: "borderLighter",
+    thumbnailSelectable: true, // enables selection mode
     galleryDisplayTransition: "rotateX",
     galleryDisplayTransitionDuration: 500,
     paginationVisiblePages: true,
     thumbnailLevelUp: false,
     locationHash: true,
     touchAnimationL1: true,
-    thumbnailSelectable: true, // enables selection mode
     fnImgToolbarCustClick: delPhoto,
   });
 
