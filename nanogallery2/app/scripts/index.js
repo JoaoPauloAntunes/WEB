@@ -1,5 +1,7 @@
 $(() => {
   const $nanogallery2 = $("#nanogallery2");
+  const nanogallery2Functions = new Nanogallery2Functions($nanogallery2);
+
 
   $nanogallery2.nanogallery2({
     itemsBaseURL: "/app/images/",
@@ -123,6 +125,15 @@ $(() => {
         ID: 15,
         albumID: 1,
       },
+      { src: "picture_15.jpeg", srct: "picture_15.jpeg", title: "Title 15", description: "Description 15", ID: 15, albumID: 1 },
+      { src: "picture_15.jpeg", srct: "picture_3.jpeg", title: "Title 16", description: "Description 16", ID: 16, albumID: 1 },
+      { src: "picture_15.jpeg", srct: "picture_15.jpeg", title: "Title 17", description: "Description 17", ID: 17, albumID: 1 },
+      { src: "picture_15.jpeg", srct: "picture_15.jpeg", title: "Title 18", description: "Description 18", ID: 18, albumID: 1 },
+      { src: "picture_15.jpeg", srct: "picture_8.jpeg", title: "Title 19", description: "Description 19", ID: 19, albumID: 1 },
+      { src: "picture_15.jpeg", srct: "picture_15.jpeg", title: "Title 20", description: "Description 20", ID: 20, albumID: 1 },
+      { src: "picture_15.jpeg", srct: "picture_11.jpeg", title: "Title 21", description: "Description 21", ID: 21, albumID: 1 },
+      { src: "picture_15.jpeg", srct: "picture_15.jpeg", title: "Title 22", description: "Description 22", ID: 22, albumID: 1 },
+      { src: "picture_15.jpeg", srct: "picture_13.jpeg", title: "Title 23", description: "Description 23", ID: 23, albumID: 1 },
       // album 2
       { src: "picture_3.jpeg", title: "album B", ID: 2, kind: "album" },
       {
@@ -183,7 +194,7 @@ $(() => {
       },
     ],
     thumbnailWidth: "auto",
-    thumbnailHeight: "250",
+    thumbnailHeight: "230",
     thumbnailBorderVertical: 3,
     thumbnailBorderHorizontal: 3,
     thumbnailLabel: {
@@ -242,6 +253,7 @@ $(() => {
     fnImgToolbarCustClick: delPhoto,
   });
 
+
   // delete selection
   $("#btn_del").on("click", function () {
     const ngy2data = $nanogallery2.nanogallery2("data");
@@ -252,6 +264,52 @@ $(() => {
     });
     $nanogallery2.nanogallery2("resize");
   });
+
+
+  // switch selection mode on/off
+  $("#btn_select_mode").on("click", function () {
+    var b = !$nanogallery2.nanogallery2("option", "thumbnailSelectable");
+    $nanogallery2.nanogallery2("option", "thumbnailSelectable", b);
+  });
+
+
+  // retrieve selected items
+  $nanogallery2.on(
+    "itemSelected.nanogallery2 itemUnSelected.nanogallery2",
+    function () {
+      const ngy2data = $nanogallery2.nanogallery2("data");
+
+      if (ngy2data.gallery.nbSelected > 0) {
+        changeHeaderToSelectionMenu();
+
+        if (ngy2data.gallery.nbSelected == 1) {
+          $("#nb_selected").text(`1 foto selecionada`);
+        } else {
+          $("#nb_selected").text(`${ngy2data.gallery.nbSelected} fotos selecionadas`);
+        }
+      } else {
+        changeHeaderToMenu();
+      }
+
+      // selected items
+      var sel = "";
+      ngy2data.items.forEach(function (item) {
+        if (item.selected) {
+          sel += `${item.GetID()}[${item.title}] `;
+        }
+      });
+      $("#selection").text(sel);
+    }
+  );
+
+
+  $("#selection_menu_cancel").on("click", function() {
+    nanogallery2Functions.selectNone();
+    changeHeaderToMenu();
+
+    $nanogallery2.nanogallery2("data").gallery.nbSelected = 0;
+  });
+
 
   function delPhoto(customElementName, $customIcon, item) {
     console.log("delPhoto");
@@ -269,29 +327,15 @@ $(() => {
     }
   }
 
-  // switch selection mode on/off
-  $("#btn_select_mode").on("click", function () {
-    var b = !$nanogallery2.nanogallery2("option", "thumbnailSelectable");
-    $nanogallery2.nanogallery2("option", "thumbnailSelectable", b);
-  });
 
-  // retrieve selected items
-  $nanogallery2.on(
-    "itemSelected.nanogallery2 itemUnSelected.nanogallery2",
-    function () {
-      const ngy2data = $nanogallery2.nanogallery2("data");
+  function changeHeaderToSelectionMenu() {
+    $("#menu").addClass("d-none");
+    $("#selection_menu").removeClass("d-none");
+  }
 
-      // counter
-      $("#nb_selected").text(ngy2data.gallery.nbSelected);
-
-      // selected items
-      var sel = "";
-      ngy2data.items.forEach(function (item) {
-        if (item.selected) {
-          sel += `${item.GetID()}[${item.title}] `;
-        }
-      });
-      $("#selection").text(sel);
-    }
-  );
+  
+  function changeHeaderToMenu() {
+    $("#menu").removeClass("d-none");
+    $("#selection_menu").addClass("d-none");  
+  }
 });

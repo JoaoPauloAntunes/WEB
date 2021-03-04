@@ -1,11 +1,8 @@
 body {
-    background-image: url("/app/images/background.jpg");
-    width: 1312px; 
-    height: 621px;
+    background: #234c60;
 }
 
-.galleria{ 
-    width: 812px; 
-    height: 521px; 
-    background: #000 
+
+.item {
+    margin: 1px;
 }
