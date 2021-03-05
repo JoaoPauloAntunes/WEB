@@ -3,19 +3,41 @@ class Nanogallery2Functions {
       this.$nanogallery2 = $nanogallery2;
     }
 
+
     allItems = function() {
       return this.$nanogallery2.nanogallery2('data').items;
     };
+
 
     allSelectedItems = function() {
       return this.$nanogallery2.nanogallery2('itemsSelectedGet');
     };
     
+
     allUnSelectedItems = function() {
       return this.allItems().filter(function(el) {
         return !el.selected;
       });
     };
+
+
+
+    allImages = function() {
+      return this.allItems().filter(item => item.kind == "image");
+    };
+
+
+    allSelectedImages = function() {
+      return this.allSelectedItems().filter(item => item.kind == "image");
+    };
+
+
+    allUnSelectedImages = function() {
+      return this.allImages().filter(function(el) {
+        return !el.selected;
+      });
+    };
+
     
     allSelectedNodeIds = function() {
       var nodeIds = [];
@@ -30,21 +52,37 @@ class Nanogallery2Functions {
       console.log(nodeIds);
       return nodeIds;
     }
+
     
     invertSelection = function() {
       this.$nanogallery2.nanogallery2('itemsSetSelectValue', this.allSelectedItems(), false);
       this.$nanogallery2.nanogallery2('itemsSetSelectValue', this.allUnSelectedItems(), false);
     };
+
     
-    selectAll = function() {
+    selectAllItems = function() {
       this.$nanogallery2.nanogallery2('itemsSetSelectedValue', this.allUnSelectedItems(), true);
     };
+
     
-    selectNone = function() {
+    selectNoneItem = function() {
       this.$nanogallery2.nanogallery2('itemsSetSelectedValue', this.allSelectedItems(), false);
     };
+
     
     countSelectedItems = function() {
       return this.allSelectedItems().length;
+    }
+
+
+
+    selectAllImages = function() {
+      this.$nanogallery2.nanogallery2('itemsSetSelectedValue', this.allUnSelectedImages(), true);
+    };
+
+    
+    countSelectedImages = function() {
+      console.log(this.allSelectedImages());
+      return this.allSelectedImages().length;
     }
 }

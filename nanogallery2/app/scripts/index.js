@@ -242,58 +242,56 @@ $(() => {
     thumbnailLevelUp: false,
     locationHash: true,
     touchAnimationL1: true,
-    fnImgToolbarCustClick: delPhoto,
+    fnImgToolbarCustClick: delItem,
   });
 
 
   // delete selection
-  $("#btn_del").on("click", function () {
-    const ngy2data = $nanogallery2.nanogallery2("data");
-    ngy2data.items.forEach(function (item) {
-      if (item.selected) {
+  $(".btn-delete-selected-items").on("click", function () {
+    $nanogallery2.nanogallery2("data").items.forEach(function(item) {
+      if (item.kind == "image") {
         item.delete();
       }
     });
+    $nanogallery2.nanogallery2("data").gallery.nbSelected = 0;
+    checkSelectedItems();
+
     $nanogallery2.nanogallery2("resize");
   });
 
 
-  // switch selection mode on/off
-  $("#btn_select_mode").on("click", function () {
-    var b = !$nanogallery2.nanogallery2("option", "thumbnailSelectable");
-    $nanogallery2.nanogallery2("option", "thumbnailSelectable", b);
-  });
-
-
   // retrieve selected items
-  $nanogallery2.on("itemSelected.nanogallery2 itemUnSelected.nanogallery2", checkSelectedPhotos);
+  $nanogallery2.on("itemSelected.nanogallery2 itemUnSelected.nanogallery2", checkSelectedItems);
 
 
-  $("#selection_menu_cancel").on("click", function() {
-    nanogallery2Functions.selectNone();
+  $(".btn-cancel").on("click", function() {
+    nanogallery2Functions.selectNoneItem();
     changeHeaderToMenu();
 
     $nanogallery2.nanogallery2("data").gallery.nbSelected = 0;
+    checkSelectedItems();
   });
 
 
-  $(".unselect_all_photos").on("click", function() {
-    nanogallery2Functions.selectNone();
+  $(".btn-unselect-all-items").on("click", function() {
+    nanogallery2Functions.selectNoneItem();
+
     $nanogallery2.nanogallery2("data").gallery.nbSelected = 0;
-    checkSelectedPhotos();
+    checkSelectedItems();
   });
 
 
-  $(".select_all_photos").on("click", function() {
-    nanogallery2Functions.selectAll();
-    $nanogallery2.nanogallery2("data").gallery.nbSelected = nanogallery2Functions.countSelectedItems();
-    checkSelectedPhotos();
+  $(".btn-select-all-items").on("click", function() {
+    nanogallery2Functions.selectAllImages();
+    $nanogallery2.nanogallery2("data").gallery.nbSelected = nanogallery2Functions.countSelectedImages();
+    checkSelectedItems();
   });
   
 
 
-  function checkSelectedPhotos() {
+  function checkSelectedItems() {
     const ngy2data = $nanogallery2.nanogallery2("data");
+    console.log(ngy2data.gallery.nbSelected);
 
     if (ngy2data.gallery.nbSelected > 0) {
       changeHeaderToSelectionMenu();
@@ -330,8 +328,8 @@ $(() => {
   }
 
 
-  function delPhoto(customElementName, $customIcon, item) {
-    console.log("delPhoto");
+  function delItem(customElementName, $customIcon, item) {
+    console.log("delItem");
     console.log(customElementName);
     console.log($customIcon);
     console.log(item);
