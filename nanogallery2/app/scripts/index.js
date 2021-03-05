@@ -234,24 +234,14 @@ $(() => {
   const albumId = "1";
 
 
-  $(".btn-delete-selected-media").on("click", function () {
-    /* $nanogallery2.nanogallery2("data").items.forEach(function(item) {
-      if (item.kind == "image") {
-        item.delete();
-      }
-    }); */
-    console.log("nanogallery2Functions.allSelectedMediaFromAlbum");
-    nanogallery2Functions.allSelectedMediaFromAlbum(albumId).forEach(item => item.delete());
-
-    $nanogallery2.nanogallery2("data").gallery.nbSelected = 0;
-    checkSelectedItems();
-
-    $nanogallery2.nanogallery2("resize");
-  });
-
-
   // retrieve selected items
   $nanogallery2.on("itemSelected.nanogallery2 itemUnSelected.nanogallery2", checkSelectedItems);
+
+
+  $(".btn-go-to-previous-page").on("click", function() {});
+
+
+  $(".btn-refresh-page").on("click", function() {});
 
 
   $(".btn-cancel").on("click", function() {
@@ -262,6 +252,46 @@ $(() => {
     checkSelectedItems();
   });
 
+
+  $(".btn-download-album").on("click", function() {
+    // mandar para a API qual álbum que deseja baixar
+    // a API deve retornar um ZIP para Download
+  });
+
+
+  $(".btn-delete-selected-media").on("click", function () {
+    /* $nanogallery2.nanogallery2("data").items.forEach(function(item) {
+      if (item.kind == "image") {
+        item.delete();
+      }
+    }); */
+    console.log("nanogallery2Functions.allSelectedMediaFromAlbum");
+    console.log(nanogallery2Functions.allSelectedMediaFromAlbum(albumId));
+    
+    nanogallery2Functions.allSelectedMediaFromAlbum(albumId).forEach(item => {
+      /*remove photo from:
+        - data_folder
+        - AWS
+        - database
+        - 
+      */
+      console.log(item.src);
+
+      item.delete();
+    });
+
+    $nanogallery2.nanogallery2("data").gallery.nbSelected = 0;
+    checkSelectedItems();
+
+    $nanogallery2.nanogallery2("resize");
+  });
+
+
+  $(".btn-download-selected-media").on("click", function() {
+    // mandar para a API quais fotos que deseja baixar
+    // a API deve retornar um ZIP para Download
+  });
+  
 
   $(".btn-unselect-all-media").on("click", function() {
     nanogallery2Functions.selectNoneItem();
