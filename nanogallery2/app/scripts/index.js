@@ -78,14 +78,6 @@ $(() => {
         albumID: 1,
       },
       {
-        src: "picture_10.jpeg",
-        srct: "picture_10.jpeg",
-        title: "Title 10",
-        description: "Description 10",
-        ID: 10,
-        albumID: 1,
-      },
-      {
         src: "picture_11.jpeg",
         srct: "picture_11.jpeg",
         title: "Title 11",
