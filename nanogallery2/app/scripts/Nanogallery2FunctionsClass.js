@@ -2,6 +2,8 @@ class Nanogallery2Functions {
     constructor($nanogallery2) {
       this.$nanogallery2 = $nanogallery2;
     }
+    mediaItemKind = "image" //  "image": for media (image or video)
+    albumItemKind = "album"
 
 
     allItems = function() {
@@ -22,18 +24,18 @@ class Nanogallery2Functions {
 
 
 
-    allImages = function() {
-      return this.allItems().filter(item => item.kind == "image");
+    allMediaFromAlbum = function(albumId) {
+      return this.allItems().filter(item => item.kind == this.mediaItemKind && item.albumID == albumId);
     };
 
 
-    allSelectedImages = function() {
-      return this.allSelectedItems().filter(item => item.kind == "image");
+    allSelectedMediaFromAlbum = function(albumId) {
+      return this.allSelectedItems().filter(item => item.kind == this.mediaItemKind && item.albumID == albumId);
     };
 
 
-    allUnSelectedImages = function() {
-      return this.allImages().filter(function(el) {
+    allUnSelectedMediaFromAlbum = function(albumId) {
+      return this.allMediaFromAlbum(albumId).filter(function(el) {
         return !el.selected;
       });
     };
@@ -76,13 +78,12 @@ class Nanogallery2Functions {
 
 
 
-    selectAllImages = function() {
-      this.$nanogallery2.nanogallery2('itemsSetSelectedValue', this.allUnSelectedImages(), true);
+    selectAllItensFromAlbum = function(albumId) {
+      this.$nanogallery2.nanogallery2('itemsSetSelectedValue', this.allUnSelectedMediaFromAlbum(albumId), true);
     };
 
     
-    countSelectedImages = function() {
-      console.log(this.allSelectedImages());
-      return this.allSelectedImages().length;
+    countSelectedMediaFromAlbum = function(albumId) {
+      return this.allSelectedMediaFromAlbum(albumId).length;
     }
 }
