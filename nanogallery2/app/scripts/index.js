@@ -180,11 +180,7 @@ $(() => {
       descriptionMultiLine: true,
     },
     allowHTMLinData: false,
-    galleryDisplayMode: "pagination",
-    galleryMaxRows: 2,
-    galleryPaginationMode: "dots",
     thumbnailAlignment: "center",
-    galleryFilterTags: "title",
     thumbnailLevelUp: true,
     thumbnailOpenImage: true,
     viewerToolbar: {
@@ -219,11 +215,14 @@ $(() => {
     thumbnailDisplayTransitionDuration: 500,
     thumbnailDisplayInterval: 30,
     thumbnailHoverEffect2: "borderLighter",
-    thumbnailSelectable: true, // enables selection mode
+    thumbnailSelectable: true,              // enables selection mode
+    thumbnailLevelUp: false,
+    galleryDisplayMode: "pagination",
+    galleryPaginationMode: "dots",
+    galleryMaxRows: 2,
+    galleryFilterTags: "title",
     galleryDisplayTransition: "rotateX",
     galleryDisplayTransitionDuration: 500,
-    paginationVisiblePages: true,
-    thumbnailLevelUp: false,
     locationHash: true,
     touchAnimationL1: true,
     fnImgToolbarCustClick: delItem,
@@ -241,7 +240,7 @@ $(() => {
         item.delete();
       }
     }); */
-    console.log(nanogallery2Functions.allSelectedMediaFromAlbum(albumId));
+    console.log("nanogallery2Functions.allSelectedMediaFromAlbum");
     nanogallery2Functions.allSelectedMediaFromAlbum(albumId).forEach(item => item.delete());
 
     $nanogallery2.nanogallery2("data").gallery.nbSelected = 0;
@@ -273,9 +272,12 @@ $(() => {
 
 
   $(".btn-select-all-media").on("click", function() {
-    nanogallery2Functions.selectAllItensFromAlbum(albumId);
+    nanogallery2Functions.selectAllMediaFromAlbum(albumId);
+
     $nanogallery2.nanogallery2("data").gallery.nbSelected = nanogallery2Functions.countSelectedMediaFromAlbum(albumId);
     checkSelectedItems();
+
+    $nanogallery2.nanogallery2("resize");
   });
   
 
@@ -288,9 +290,9 @@ $(() => {
       changeHeaderToSelectionMenu();
 
       if (ngy2data.gallery.nbSelected == 1) {
-        $("#nb_selected").text(`1 foto selecionada`);
+        $("#nb_selected").text(`1 item selecionado`);
       } else {
-        $("#nb_selected").text(`${ngy2data.gallery.nbSelected} fotos selecionadas`);
+        $("#nb_selected").text(`${ngy2data.gallery.nbSelected} itens selecionados`);
       }
     } else {
       changeHeaderToMenu();
