@@ -22,24 +22,6 @@ class Nanogallery2Functions {
       });
     };
 
-
-
-    allMediaFromAlbum = function(albumId) {
-      return this.allItems().filter(item => item.kind == this.mediaItemKind && item.albumID == albumId);
-    };
-
-
-    allSelectedMediaFromAlbum = function(albumId) {
-      return this.allSelectedItems().filter(item => item.kind == this.mediaItemKind && item.albumID == albumId);
-    };
-
-
-    allUnSelectedMediaFromAlbum = function(albumId) {
-      return this.allMediaFromAlbum(albumId).filter(function(el) {
-        return !el.selected;
-      });
-    };
-
     
     allSelectedNodeIds = function() {
       var nodeIds = [];
@@ -78,7 +60,24 @@ class Nanogallery2Functions {
 
 
 
-    selectAllItensFromAlbum = function(albumId) {
+    allMediaFromAlbum = function(albumId) {
+      return this.allItems().filter(item => item.kind == this.mediaItemKind && item.albumID == albumId);
+    };
+
+
+    allSelectedMediaFromAlbum = function(albumId) {
+      return this.allSelectedItems().filter(item => item.kind == this.mediaItemKind && item.albumID == albumId);
+    };
+
+
+    allUnSelectedMediaFromAlbum = function(albumId) {
+      return this.allMediaFromAlbum(albumId).filter(function(el) {
+        return !el.selected;
+      });
+    };
+
+
+    selectAllMediaFromAlbum = function(albumId) {
       this.$nanogallery2.nanogallery2('itemsSetSelectedValue', this.allUnSelectedMediaFromAlbum(albumId), true);
     };
 
