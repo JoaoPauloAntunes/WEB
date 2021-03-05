@@ -12,14 +12,14 @@ class Nanogallery2Functions {
     };
     
     allUnSelectedItems = function() {
-      return allItems().filter(function(el) {
+      return this.allItems().filter(function(el) {
         return !el.selected;
       });
     };
     
     allSelectedNodeIds = function() {
       var nodeIds = [];
-      allSelectedItems().forEach(function(e, i) {
+      this.allSelectedItems().forEach(function(e, i) {
         if (!((typeof e.customData) == "string") || e.customData == "") {
           console.log("No custom data detected! Skipping");
           console.log(e);
@@ -32,24 +32,19 @@ class Nanogallery2Functions {
     }
     
     invertSelection = function() {
-      var selectedItems = this.allSelectedItems();
-      var unSelectedItems = this.allUnSelectedItems();
       this.$nanogallery2.nanogallery2('itemsSetSelectValue', this.allSelectedItems(), false);
       this.$nanogallery2.nanogallery2('itemsSetSelectValue', this.allUnSelectedItems(), false);
-      return false;
     };
     
     selectAll = function() {
       this.$nanogallery2.nanogallery2('itemsSetSelectedValue', this.allUnSelectedItems(), true);
-      return false;
     };
     
     selectNone = function() {
       this.$nanogallery2.nanogallery2('itemsSetSelectedValue', this.allSelectedItems(), false);
-      return false;
     };
     
     countSelectedItems = function() {
-      return allSelectedItems().length;
+      return this.allSelectedItems().length;
     }
 }

@@ -194,7 +194,7 @@ $(() => {
       },
     ],
     thumbnailWidth: "auto",
-    thumbnailHeight: "230",
+    thumbnailHeight: "220",
     thumbnailBorderVertical: 3,
     thumbnailBorderHorizontal: 3,
     thumbnailLabel: {
@@ -274,33 +274,7 @@ $(() => {
 
 
   // retrieve selected items
-  $nanogallery2.on(
-    "itemSelected.nanogallery2 itemUnSelected.nanogallery2",
-    function () {
-      const ngy2data = $nanogallery2.nanogallery2("data");
-
-      if (ngy2data.gallery.nbSelected > 0) {
-        changeHeaderToSelectionMenu();
-
-        if (ngy2data.gallery.nbSelected == 1) {
-          $("#nb_selected").text(`1 foto selecionada`);
-        } else {
-          $("#nb_selected").text(`${ngy2data.gallery.nbSelected} fotos selecionadas`);
-        }
-      } else {
-        changeHeaderToMenu();
-      }
-
-      // selected items
-      var sel = "";
-      ngy2data.items.forEach(function (item) {
-        if (item.selected) {
-          sel += `${item.GetID()}[${item.title}] `;
-        }
-      });
-      $("#selection").text(sel);
-    }
-  );
+  $nanogallery2.on("itemSelected.nanogallery2 itemUnSelected.nanogallery2", checkSelectedPhotos);
 
 
   $("#selection_menu_cancel").on("click", function() {
@@ -309,6 +283,59 @@ $(() => {
 
     $nanogallery2.nanogallery2("data").gallery.nbSelected = 0;
   });
+
+
+  $(".unselect_all_photos").on("click", function() {
+    nanogallery2Functions.selectNone();
+    $nanogallery2.nanogallery2("data").gallery.nbSelected = 0;
+    checkSelectedPhotos();
+  });
+
+
+  $(".select_all_photos").on("click", function() {
+    nanogallery2Functions.selectAll();
+    $nanogallery2.nanogallery2("data").gallery.nbSelected = nanogallery2Functions.countSelectedItems();
+    checkSelectedPhotos();
+  });
+  
+
+
+  function checkSelectedPhotos() {
+    const ngy2data = $nanogallery2.nanogallery2("data");
+
+    if (ngy2data.gallery.nbSelected > 0) {
+      changeHeaderToSelectionMenu();
+
+      if (ngy2data.gallery.nbSelected == 1) {
+        $("#nb_selected").text(`1 foto selecionada`);
+      } else {
+        $("#nb_selected").text(`${ngy2data.gallery.nbSelected} fotos selecionadas`);
+      }
+    } else {
+      changeHeaderToMenu();
+    }
+
+    // selected items
+    var sel = "";
+    ngy2data.items.forEach(function (item) {
+      if (item.selected) {
+        sel += `${item.GetID()}[${item.title}] `;
+      }
+    });
+    $("#selection").text(sel);
+  }
+
+
+  function changeHeaderToSelectionMenu() {
+    $("#menu").addClass("d-none");
+    $("#selection_menu").removeClass("d-none");
+  }
+
+  
+  function changeHeaderToMenu() {
+    $("#menu").removeClass("d-none");
+    $("#selection_menu").addClass("d-none");  
+  }
 
 
   function delPhoto(customElementName, $customIcon, item) {
@@ -325,17 +352,5 @@ $(() => {
       ngy2data.items.splice(0, 1);
       $nanogallery2.nanogallery2("resize"); */
     }
-  }
-
-
-  function changeHeaderToSelectionMenu() {
-    $("#menu").addClass("d-none");
-    $("#selection_menu").removeClass("d-none");
-  }
-
-  
-  function changeHeaderToMenu() {
-    $("#menu").removeClass("d-none");
-    $("#selection_menu").addClass("d-none");  
   }
 });

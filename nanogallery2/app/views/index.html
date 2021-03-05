@@ -14,8 +14,8 @@
     <button id="btn_del">delete selection</button> -->
     
     <div class="container-fluid">
-      <headear id="menu" class="row bg-light justify-content-between">
-        <div class="col d-flex flex-row align-items-center">
+      <headear id="menu" class="row bg-light">
+        <div class="col d-flex justify-content-start">
           <div class="item btn btn-light" title="Voltar para a página anterior">
             <span class="fa-stack"><i class="fa fa-arrow-left fa-stack-2x"></i></span>
           </div>
@@ -23,29 +23,40 @@
             <span class="fa-stack"><i class="fa fa-undo-alt fa-stack-2x"></i></span>
           </div>
         </div>
-        <div class="h1 col d-flex flex-column align-items-center">Galeria</div>
-        <div class="col d-flex flex-row-reverse align-items-center">
-          <!-- <span class="fa-stack"><i class="fa fa-trash-alt fa-stack-2x"></i></span> -->
+        <div class="col h1 d-flex justify-content-center">Galeria</div>
+        <div class="col d-flex justify-content-end">
           <div class="item btn btn-light" title="Baixar álbum">
             <span class="fa-stack"><i class="fa fa-download fa-stack-2x"></i></span>
+          </div>
+          <div class="unselect_all_photos item btn btn-light" title="Desselecionar todas as fotos">
+            <span class="fa-stack"><i class="fa fa-square fa-stack-2x" style="margin: -3px -3px;"></i><i class="fa fa-square fa-stack-2x" style="margin: 6px 6px;"></i></span>
+          </div>
+          <div class="select_all_photos item btn btn-light" title="Selecionar todas as fotos">
+            <span class="fa-stack"><i class="fa fa-square fa-stack-2x" style="margin: -3px -3px;"></i><i class="fa fa-square fa-stack-2x fa-inverse" style="margin: 6px 6px;"></i><i class="fa fa-check-square fa-stack-2x" style="margin: 6px 6px"></i></span>
           </div>
         </div>
       </headear>
 
-      <headear id="selection_menu" class="row bg-light justify-content-between d-none">
-        <div class="col d-flex flex-row align-items-center">
+      <headear id="selection_menu" class="row bg-light d-none">
+        <div class="col d-flex justify-content-start">
           <div id="selection_menu_cancel" class="item btn btn-light" title="Cancelar seleção">
-            <span class="fa-stack"><i class="fa fa-times fa-stack-2x"></i></span>
+            <span class="fa-stack"><i class="fa fa-times fa-stack-2x pt-1"></i></span>
           </div>
-          <div class="item btn btn-light" title="Recarregar página"><span id="nb_selected"></span></div>
+          <div class="item h5 pt-3" title="Recarregar página"><span id="nb_selected"></span></div>
         </div>
-        <div class="h1 col d-flex flex-column align-items-center">Galeria</div>
-        <div class="col d-flex flex-row-reverse">
-          <div class="item btn btn-light" title="Baixar fotos selecionadas">
+        <div class="col h1 d-flex justify-content-center">Galeria</div>
+        <div class="col d-flex justify-content-end">
+          <div class="item btn btn-light" title="Apagar fotos selecionadas">
             <span class="fa-stack"><i class="fa fa-trash-alt fa-stack-2x"></i></span>
           </div>
-          <div class="item btn btn-light" title="Apagar fotos selecionadas">
+          <div class="item btn btn-light" title="Baixar fotos selecionadas">
             <span class="fa-stack"><i class="fa fa-download fa-stack-2x"></i></span>
+          </div>
+          <div class="unselect_all_photos item btn btn-light" title="Desselecionar todas as fotos">
+            <span class="fa-stack"><i class="fa fa-square fa-stack-2x" style="margin: -3px -3px;"></i><i class="fa fa-square fa-stack-2x" style="margin: 6px 6px;"></i></span>
+          </div>
+          <div class="select_all_photos item btn btn-light" title="Selecionar todas as fotos">
+            <span class="fa-stack"><i class="fa fa-square fa-stack-2x" style="margin: -3px -3px;"></i><i class="fa fa-square fa-stack-2x fa-inverse" style="margin: 6px 6px;"></i><i class="fa fa-check-square fa-stack-2x" style="margin: 6px 6px"></i></span>
           </div>
         </div>
       </headear>
