@@ -20,15 +20,11 @@ class Nanogallery2Functions {
 
 
     deleteItem = function(targetItem) {
-      console.log("deleteItem");
-      
       this.items.forEach((item, index) => {
         const itemId = item.GetID();
         const targetItemId = targetItem.GetID();
         if (itemId == targetItemId) {
           this.items.splice(index, 1);
-          console.log("items changed!");
-          console.log(this.items);
         }
       }); 
 
