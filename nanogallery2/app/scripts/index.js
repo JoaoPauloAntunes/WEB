@@ -16,8 +16,8 @@ $(() => {
       {
         src: "picture_2.jpeg",        // image url
         srct: "picture_2.jpeg",       // thumbnail url
-        title: "Title 2",             // media title
-        description: "Description 2", // media description
+        title: "Title 2 gjy tjyu yt jytj ytuj yukj yuk jyu kyu kyu sgdfgdfgdf gfd gdf gdf gdf gdfgd",             // media title
+        description: "Description 2 dfhgfdhfgh fjfjjh gjgh jgh gh jg dsg dhg fdhg sgdsfgdfgdfgdfdgd", // media description
         ID: "picture_2.jpeg",
         albumID: "album_A",
       },
@@ -100,26 +100,36 @@ $(() => {
     thumbnailBorderHorizontal: 3,
     thumbnailLabel: {
       position: "overImageOnBottom",
-      titleMultiLine: true,
-      displayDescription: true,
-      descriptionMultiLine: true,
+      display: true,                // default: true
+      hideIcons: false,             // default: true
+      titleMultiLine: false,        // default: false
+      titleMaxLength: 50,           // default: 0 (Title maximum length to display)
+      titleFontSize: "0.8em",       // default: 1em
+      displayDescription: true,     // default: false
+      descriptionMultiLine: false,  // default: false
+      descriptionMaxLength: 57,     // default: 0 (Title maximum length to display)
+      descriptionFontSize: "0.7em", // default: "0.8em"
     },
-    allowHTMLinData: false,
     thumbnailAlignment: "center",
-    thumbnailLevelUp: true,
+    thumbnailLevelUp: false,        // default: false (it's ugly and strange)
     thumbnailOpenImage: true,
+    thumbnailDisplayTransition: "scaleUp",
+    thumbnailDisplayTransitionDuration: 500,
+    thumbnailDisplayInterval: 30,
+    thumbnailHoverEffect2: "borderLighter",
+    thumbnailSelectable: true,              // enables selection mode
     viewerToolbar: {
-      display: true,
+      display: true,                        // default: false
       standard: "label",
       // minimized: "label",
     },
     viewerTools: {
       topLeft: "pageCounter, playPauseButton, infoButton",
       topRight:
-        "zoomButton, rotateLeft, rotateRight, custom1, downloadButton, fullscreenButton, closeButton",
+      "zoomButton, rotateLeft, rotateRight, custom1, downloadButton, fullscreenButton, closeButton",
     },
-    // viewerTheme: "dark",
-    viewerImageDisplay: "bestImageQuality",
+    viewerTheme: "dark",                    // default: dark (can be: 'dark', 'light', 'border')
+    viewerImageDisplay: "bestImageQuality", // can be: 'bestImageQuality', 'upscale'
     thumbnailToolbarImage: {
       topRight: "download, info",
     },
@@ -136,31 +146,32 @@ $(() => {
         color: "#444",
       },
     },
-    thumbnailDisplayTransition: "scaleUp",
-    thumbnailDisplayTransitionDuration: 500,
-    thumbnailDisplayInterval: 30,
-    thumbnailHoverEffect2: "borderLighter",
-    thumbnailSelectable: true,              // enables selection mode
-    thumbnailLevelUp: false,
     galleryDisplayMode: "pagination",
     galleryPaginationMode: "dots",
     galleryMaxRows: 2,
     galleryFilterTags: "title",
     galleryDisplayTransition: "rotateX",
     galleryDisplayTransitionDuration: 500,
-    locationHash: true,
-    touchAnimationL1: true,
-    fnImgToolbarCustClick: delItem,
+    fnImgToolbarCustClick: deleteMedia,
+    locationHash: true,                     // default: true
+    allowHTMLinData: false,                 // default: false (false for security: could lead to XSS (cross site scripting) vulnerability)
   });
 
 
 
-  // tmp
-  const albumId = "album_A";
+  const trashCart = "custom1";
+  // let currentAlbumId = -1;      // can be int, str
+  let currentAlbumId = "album_A";      // can be int, str
 
 
   // retrieve selected items
-  $nanogallery2.on("itemSelected.nanogallery2 itemUnSelected.nanogallery2", checkSelectedItems);
+  // $nanogallery2.on("itemSelected.nanogallery2 itemUnSelected.nanogallery2", checkSelectedItems);
+  $nanogallery2.on("itemSelected.nanogallery2", function(event) {
+    console.log(event);
+    console.log(event.target);
+    checkSelectedItems();
+  });
+  $nanogallery2.on("itemUnSelected.nanogallery2", checkSelectedItems);
 
 
   $(".btn-go-to-previous-page").on("click", function() {});
@@ -191,13 +202,11 @@ $(() => {
       }
     }); */
     console.log("nanogallery2Functions.allSelectedMediaFromAlbum");
-    console.log(nanogallery2Functions.allSelectedMediaFromAlbum(albumId));
+    console.log(nanogallery2Functions.allSelectedMediaFromAlbum(currentAlbumId));
     
-    nanogallery2Functions.allSelectedMediaFromAlbum(albumId).forEach(item => {
+    nanogallery2Functions.allSelectedMediaFromAlbum(currentAlbumId).forEach(item => {
       /*remove photo from:
         - data_folder
-        - AWS
-        - database
         - 
       */
       console.log(item.src);
@@ -227,9 +236,9 @@ $(() => {
 
 
   $(".btn-select-all-media").on("click", function() {
-    nanogallery2Functions.selectAllMediaFromAlbum(albumId);
+    nanogallery2Functions.selectAllMediaFromAlbum(currentAlbumId);
 
-    $nanogallery2.nanogallery2("data").gallery.nbSelected = nanogallery2Functions.countSelectedMediaFromAlbum(albumId);
+    $nanogallery2.nanogallery2("data").gallery.nbSelected = nanogallery2Functions.countSelectedMediaFromAlbum(currentAlbumId);
     checkSelectedItems();
 
     $nanogallery2.nanogallery2("resize");
@@ -276,19 +285,28 @@ $(() => {
   }
 
 
-  function delItem(customElementName, $customIcon, item) {
-    console.log("delItem");
+  function deleteMedia(customElementName, $customIcon, media) {
+    console.log("deleteMedia");
     console.log(customElementName);
     console.log($customIcon);
-    console.log(item);
-    console.log(item.GetID());
-    console.log(item.src);
+    console.log(media);
+    console.log(media.GetID());
+    console.log(media.src);
 
-    const trashCart = "custom1";
     if (customElementName == trashCart) {
-      /* const ngy2data = $nanogallery2.nanogallery2("data");
-      ngy2data.items.splice(0, 1);
-      $nanogallery2.nanogallery2("resize"); */
+      nanogallery2Functions.allSelectedMediaFromAlbum(currentAlbumId).forEach(item => {
+        /*remove photo from:
+          - data_folder
+        */
+        console.log(item.src);
+  
+        item.delete();
+      });
+  
+      $nanogallery2.nanogallery2("data").gallery.nbSelected = 0;
+      checkSelectedItems();
+  
+      $nanogallery2.nanogallery2("resize");
     }
   }
 });
