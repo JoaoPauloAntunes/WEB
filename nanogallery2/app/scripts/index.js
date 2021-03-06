@@ -153,25 +153,58 @@ $(() => {
     galleryDisplayTransition: "rotateX",
     galleryDisplayTransitionDuration: 500,
     fnImgToolbarCustClick: deleteMedia,
-    locationHash: true,                     // default: true
+    locationHash: true,                     // default: true (in this application, must be true, as it is used as a location reference in the gallery)
     allowHTMLinData: false,                 // default: false (false for security: could lead to XSS (cross site scripting) vulnerability)
   });
 
 
 
+  const $baseMenu = $("#base_menu");
+  const $menu = $("#menu");
+  const $selectionMenu = $("#selection_menu");
+
   const trashCart = "custom1";
-  // let currentAlbumId = -1;      // can be int, str
-  let currentAlbumId = "album_A";      // can be int, str
+  const baseAlbumId = "0";                  // "0" is the album entitled "Galleries", the base album 
+  let currentAlbumId = baseAlbumId;
 
 
-  // retrieve selected items
-  // $nanogallery2.on("itemSelected.nanogallery2 itemUnSelected.nanogallery2", checkSelectedItems);
-  $nanogallery2.on("itemSelected.nanogallery2", function(event) {
-    console.log(event);
-    console.log(event.target);
+  $nanogallery2.on("itemSelected.nanogallery2", event => {
+    /* doesn't work as expected!
+    if (currentAlbumId == baseAlbumId) {
+        nanogallery2Functions.selectNoneItem();
+    } else {
+      checkSelectedItems();
+    } */
     checkSelectedItems();
   });
+
+
   $nanogallery2.on("itemUnSelected.nanogallery2", checkSelectedItems);
+
+  
+  /* $nanogallery2.on("pageChanged.nanogallery2", function(a, b, c) {
+    console.log(a);
+    console.log(b);
+    console.log(c);
+  }) */
+  /* $nanogallery2.on("galleryRenderStart.nanogallery2 galleryRenderEnd.nanogallery2 galleryObjectModelBuilt.nanogallery2 galleryLayoutApplied.nanogallery2 galleryDisplayed.nanogallery2", function(a, b, c) {
+    console.log(a);
+    console.log(b);
+    console.log(c);
+  }); */
+
+  $nanogallery2.on("galleryDisplayed.nanogallery2", function(event) {
+    const splitCurrentUrl = window.location.href.split("/");
+    const lastIndex = splitCurrentUrl.length - 1;
+    const albumId = splitCurrentUrl[lastIndex];
+
+    currentAlbumId = (albumId == "" ? baseAlbumId : albumId);
+    if (currentAlbumId == baseAlbumId) {
+      changeHeaderToBaseMenu();
+    } else {
+      changeHeaderToMenu();
+    }
+  });
 
 
   $(".btn-go-to-previous-page").on("click", function() {});
@@ -248,8 +281,6 @@ $(() => {
 
   function checkSelectedItems() {
     const ngy2data = $nanogallery2.nanogallery2("data");
-    console.log(ngy2data.gallery.nbSelected);
-
     if (ngy2data.gallery.nbSelected > 0) {
       changeHeaderToSelectionMenu();
 
@@ -272,16 +303,29 @@ $(() => {
     $("#selection").text(sel);
   }
 
-
-  function changeHeaderToSelectionMenu() {
-    $("#menu").addClass("d-none");
-    $("#selection_menu").removeClass("d-none");
+  
+  function changeHeaderToBaseMenu() {
+    $baseMenu.removeClass("d-none");
+    $menu.addClass("d-none");  
+    $selectionMenu.addClass("d-none");
   }
 
   
   function changeHeaderToMenu() {
-    $("#menu").removeClass("d-none");
-    $("#selection_menu").addClass("d-none");  
+    if (currentAlbumId != baseAlbumId) {
+      $baseMenu.addClass("d-none");
+      $menu.removeClass("d-none");  
+      $selectionMenu.addClass("d-none");
+    }
+  }
+  
+  
+  function changeHeaderToSelectionMenu() {
+    if (currentAlbumId != baseAlbumId) {
+      $baseMenu.addClass("d-none");
+      $menu.addClass("d-none");  
+      $selectionMenu.removeClass("d-none");
+    }
   }
 
 

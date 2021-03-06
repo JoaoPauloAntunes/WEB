@@ -10,11 +10,25 @@
     <link rel="stylesheet" href="/app/styles/index.css">
   </head>
   <body>
-    <!-- <button id="btn_select_mode">switch selection mode on/off</button>
-    <button id="btn_del">delete selection</button> -->
-    
     <div class="container-fluid">
-      <headear id="menu" class="row bg-light">
+      <headear id="base_menu" class="row bg-light">
+        <div class="col d-flex justify-content-start">
+          <div class="btn-go-to-previous-page btn btn-light" title="Voltar para a página anterior">
+            <span class="fa-stack"><i class="fa fa-arrow-left fa-stack-2x"></i></span>
+          </div>
+          <div class="btn-refresh-page btn btn-light" title="Recarregar página">
+            <span class="fa-stack"><i class="fa fa-redo-alt fa-stack-2x"></i></span>
+          </div>
+        </div>
+        <div class="col h1 d-flex justify-content-center">Galeria</div>
+        <div class="col d-flex justify-content-end">
+          <div class="btn-unselect-all-media btn btn-light" title="Desselecionar todas as itens">
+            <span class="fa-stack"><i class="fa fa-square fa-stack-2x" style="margin: -3px -3px;"></i><i class="fa fa-square fa-stack-2x" style="margin: 6px 6px;"></i></span>
+          </div>
+        </div>
+      </headear>
+
+      <headear id="menu" class="row bg-light d-none">
         <div class="col d-flex justify-content-start">
           <div class="btn-go-to-previous-page btn btn-light" title="Voltar para a página anterior">
             <span class="fa-stack"><i class="fa fa-arrow-left fa-stack-2x"></i></span>
@@ -65,7 +79,7 @@
         <div class="col">
             <div id="nanogallery2"></div>
         </div>
-    </div>
+      </div>
     </div>
 
     
