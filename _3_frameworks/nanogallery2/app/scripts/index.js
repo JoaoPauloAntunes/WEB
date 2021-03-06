@@ -203,7 +203,6 @@ $(() => {
 
   $(".btn-cancel").on("click", function() {
     nanogallery2Functions.selectNoneItem();
-    $nanogallery2.nanogallery2("data").gallery.nbSelected = 0;
     checkSelectedItems();
   });
 
@@ -262,7 +261,6 @@ $(() => {
   $(".btn-select-all-media").on("click", function() {
     nanogallery2Functions.selectAllMediaFromAlbum(currentAlbumId);
 
-    $nanogallery2.nanogallery2("data").gallery.nbSelected = nanogallery2Functions.countSelectedMediaFromAlbum(currentAlbumId);
     checkSelectedItems();
 
     $nanogallery2.nanogallery2("resize");
@@ -323,17 +321,16 @@ $(() => {
     console.log(media.src);
 
     if (customElementName == trashCart) {
-      nanogallery2Functions.allSelectedMediaFromAlbum(currentAlbumId).forEach(item => {
-        /*remove photo from:
-          - data_folder
-        */
-        console.log(item.src);
-  
-        item.delete();
-      });
-  
-      $nanogallery2.nanogallery2("data").gallery.nbSelected = 0;
-      checkSelectedItems();
+      // nanogallery2Functions.allSelectedMediaFromAlbum(currentAlbumId).forEach(item => {
+      //   /*remove photo from:
+      //     - data_folder
+      //   */
+      //   console.log(item.src);
+
+      //   nanogallery2Functions.deleteItem(item);
+      // });
+      nanogallery2Functions.deleteItem(media);
+      $("#nanogallery2").nanogallery2('closeViewer');
   
       $nanogallery2.nanogallery2("resize");
     }
