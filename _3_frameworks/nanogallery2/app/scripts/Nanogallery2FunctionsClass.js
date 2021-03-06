@@ -1,14 +1,39 @@
 class Nanogallery2Functions {
     constructor($nanogallery2) {
       this.$nanogallery2 = $nanogallery2;
+      this.items = this.$nanogallery2.nanogallery2("data").items.slice();
+      this.itemsLength = this.items.length;
     }
-    mediaItemKind = "image" //  "image": for media (image or video)
-    albumItemKind = "album"
+    mediaItemKind = "image";      //  "image": for media (image or video)
+    albumItemKind = "album";
 
 
     allItems = function() {
-      return this.$nanogallery2.nanogallery2('data').items;
+      const nanogallery2Items = this.$nanogallery2.nanogallery2("data").items;
+      if (nanogallery2Items.length > this.itemsLength) {
+        this.items = nanogallery2Items;
+        console.error("Nanogallery2Functions.allItems: items were overwritten by nanogallery2Items because the size of nanogallery2Items has increased!");
+      }
+
+      return this.items;
     };
+
+
+    deleteItem = function(targetItem) {
+      console.log("deleteItem");
+      
+      this.items.forEach((item, index) => {
+        const itemId = item.GetID();
+        const targetItemId = targetItem.GetID();
+        if (itemId == targetItemId) {
+          this.items.splice(index, 1);
+          console.log("items changed!");
+          console.log(this.items);
+        }
+      }); 
+
+      targetItem.delete();
+    }
 
 
     allSelectedItems = function() {

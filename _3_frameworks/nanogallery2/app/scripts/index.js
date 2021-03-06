@@ -1,7 +1,5 @@
 $(() => {
   const $nanogallery2 = $("#nanogallery2");
-  const nanogallery2Functions = new Nanogallery2Functions($nanogallery2);
-
 
   $nanogallery2.nanogallery2({
     itemsBaseURL: "/app/images/",
@@ -157,6 +155,7 @@ $(() => {
     allowHTMLinData: false,                 // default: false (false for security: could lead to XSS (cross site scripting) vulnerability)
   });
 
+  const nanogallery2Functions = new Nanogallery2Functions($nanogallery2);
 
 
   const $baseMenu = $("#base_menu");
@@ -181,17 +180,6 @@ $(() => {
 
   $nanogallery2.on("itemUnSelected.nanogallery2", checkSelectedItems);
 
-  
-  /* $nanogallery2.on("pageChanged.nanogallery2", function(a, b, c) {
-    console.log(a);
-    console.log(b);
-    console.log(c);
-  }) */
-  /* $nanogallery2.on("galleryRenderStart.nanogallery2 galleryRenderEnd.nanogallery2 galleryObjectModelBuilt.nanogallery2 galleryLayoutApplied.nanogallery2 galleryDisplayed.nanogallery2", function(a, b, c) {
-    console.log(a);
-    console.log(b);
-    console.log(c);
-  }); */
 
   $nanogallery2.on("galleryDisplayed.nanogallery2", function(event) {
     const splitCurrentUrl = window.location.href.split("/");
@@ -202,7 +190,7 @@ $(() => {
     if (currentAlbumId == baseAlbumId) {
       changeHeaderToBaseMenu();
     } else {
-      changeHeaderToMenu();
+      checkSelectedItems();
     }
   });
 
@@ -215,8 +203,6 @@ $(() => {
 
   $(".btn-cancel").on("click", function() {
     nanogallery2Functions.selectNoneItem();
-    changeHeaderToMenu();
-
     $nanogallery2.nanogallery2("data").gallery.nbSelected = 0;
     checkSelectedItems();
   });
@@ -229,25 +215,31 @@ $(() => {
 
 
   $(".btn-delete-selected-media").on("click", function () {
-    /* $nanogallery2.nanogallery2("data").items.forEach(function(item) {
-      if (item.kind == "image") {
-        item.delete();
+    const mediaItemKind = "image";      //  "image": for media (image or video)
+
+    /* $nanogallery2.nanogallery2("data").items.forEach(item => {
+      if (item.selected === true && item.kind == mediaItemKind && item.albumID == currentAlbumId) {
+        // item.delete();
+        deleteItem
       }
     }); */
-    console.log("nanogallery2Functions.allSelectedMediaFromAlbum");
-    console.log(nanogallery2Functions.allSelectedMediaFromAlbum(currentAlbumId));
-    
+    /* $nanogallery2.nanogallery2("data").items.forEach(item => {
+      const itemId = item.GetID();
+      if (itemId == currentAlbumId) {
+        console.log(item.getContentLength());
+      }
+    }); */
     nanogallery2Functions.allSelectedMediaFromAlbum(currentAlbumId).forEach(item => {
-      /*remove photo from:
-        - data_folder
-        - 
-      */
-      console.log(item.src);
+      // remove photo from data_folder
 
-      item.delete();
+      // console.log(item);
+      // console.log(item.src);
+      // console.log(item.GetID()); 
+      
+      // remove item
+      nanogallery2Functions.deleteItem(item);
     });
 
-    $nanogallery2.nanogallery2("data").gallery.nbSelected = 0;
     checkSelectedItems();
 
     $nanogallery2.nanogallery2("resize");
@@ -262,8 +254,7 @@ $(() => {
 
   $(".btn-unselect-all-media").on("click", function() {
     nanogallery2Functions.selectNoneItem();
-
-    $nanogallery2.nanogallery2("data").gallery.nbSelected = 0;
+    
     checkSelectedItems();
   });
 
@@ -281,32 +272,26 @@ $(() => {
 
   function checkSelectedItems() {
     const ngy2data = $nanogallery2.nanogallery2("data");
-    if (ngy2data.gallery.nbSelected > 0) {
+    ngy2data.gallery.nbSelected = nanogallery2Functions.countSelectedMediaFromAlbum(currentAlbumId);
+
+    const nbSelected = ngy2data.gallery.nbSelected;
+    if (nbSelected > 0) {
       changeHeaderToSelectionMenu();
 
-      if (ngy2data.gallery.nbSelected == 1) {
+      if (nbSelected == 1) {
         $("#nb_selected").text(`1 item selecionado`);
       } else {
-        $("#nb_selected").text(`${ngy2data.gallery.nbSelected} itens selecionados`);
+        $("#nb_selected").text(`${nbSelected} itens selecionados`);
       }
     } else {
       changeHeaderToMenu();
     }
-
-    // selected items
-    var sel = "";
-    ngy2data.items.forEach(function (item) {
-      if (item.selected) {
-        sel += `${item.GetID()}[${item.title}] `;
-      }
-    });
-    $("#selection").text(sel);
   }
 
   
   function changeHeaderToBaseMenu() {
     $baseMenu.removeClass("d-none");
-    $menu.addClass("d-none");  
+    $menu.addClass("d-none");
     $selectionMenu.addClass("d-none");
   }
 
@@ -314,7 +299,7 @@ $(() => {
   function changeHeaderToMenu() {
     if (currentAlbumId != baseAlbumId) {
       $baseMenu.addClass("d-none");
-      $menu.removeClass("d-none");  
+      $menu.removeClass("d-none");
       $selectionMenu.addClass("d-none");
     }
   }
@@ -323,8 +308,8 @@ $(() => {
   function changeHeaderToSelectionMenu() {
     if (currentAlbumId != baseAlbumId) {
       $baseMenu.addClass("d-none");
-      $menu.addClass("d-none");  
-      $selectionMenu.removeClass("d-none");
+      $menu.addClass("d-none");
+      $("#selection_menu").removeClass("d-none");
     }
   }
 
