@@ -132,20 +132,10 @@ $(() => {
       topRight: "download, info",
     },
     icons: {
-      thumbnailDownload:
-        '<span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-download fa-stack-1x fa-inverse"></i></span>',
-      thumbnailInfo:
-        '<span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-question fa-stack-1x fa-inverse"></i></span>',
-      viewerCustomTool1:
-        '<span class="fa-stack"><i class="fa fa-trash-alt fa-stack-1x"></i></span>',
+      viewerCustomTool1: '<span class="fa-stack"><i class="fa fa-trash-alt fa-stack-1x"></i></span>',
     },
-    colorScheme: {
-      thumbnailIcon: {
-        color: "#444",
-      },
-    },
-    galleryDisplayMode: "pagination",
-    galleryPaginationMode: "dots",
+    // galleryDisplayMode: "pagination",
+    // galleryPaginationMode: "dots",
     galleryMaxRows: 2,
     galleryFilterTags: "title",
     galleryDisplayTransition: "rotateX",
@@ -228,6 +218,7 @@ $(() => {
         console.log(item.getContentLength());
       }
     }); */
+
     nanogallery2Functions.allSelectedMediaFromAlbum(currentAlbumId).forEach(item => {
       // remove photo from data_folder
 
@@ -236,9 +227,10 @@ $(() => {
       // console.log(item.GetID()); 
       
       // remove item
+      console.log(item);
       nanogallery2Functions.deleteItem(item);
     });
-
+    
     checkSelectedItems();
 
     $nanogallery2.nanogallery2("resize");
@@ -259,6 +251,9 @@ $(() => {
 
 
   $(".btn-select-all-media").on("click", function() {
+    
+    
+
     nanogallery2Functions.selectAllMediaFromAlbum(currentAlbumId);
 
     checkSelectedItems();
