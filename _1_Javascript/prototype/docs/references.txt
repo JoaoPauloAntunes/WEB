@@ -1,0 +1,1 @@
+https://tableless.com.br/dominando-o-uso-de-prototype-em-javascript/
